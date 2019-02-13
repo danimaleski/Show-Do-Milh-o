@@ -1,0 +1,96 @@
+public class ShowDoMilhao {
+	private int countQuestoes;
+	Jogador player;
+	private BancoDeQuestoes bq;
+	private Questao q;
+	private static int DESISTIR = 0;
+	private static int ALTERNATIVA_A = 1;
+	private static int ALTERNATIVA_D = 4;
+	private static int PULAR = 5;
+	private static int REMOVER_OPCAO = 6;
+	
+	
+	public ShowDoMilhao(){
+		this.countQuestoes = 0;
+		this.player = new Jogador();
+		this.bq = new BancoDeQuestoes();
+		this.q = new Questao();
+	}
+	
+	public void proximaQuestao() {
+		if (countQuestoes <= 3){
+			this.q = bq.sortearQuestaoFacil();
+		}
+		else{ 
+			if (countQuestoes <= 6){
+				this.q = bq.sortearQuestaoMedia();
+			}
+			else {
+				this.q = bq.sortearQuestaoDificil();
+			}
+		}
+	}
+	
+	public boolean validaEscolhaJogador(int escolha){
+		if (escolha == PULAR){
+			return this.player.podePular();
+		}else{ 
+			if (escolha == REMOVER_OPCAO){
+				return this.player.podeRemoverOpcao();
+			}
+		}
+		return true;
+	}
+
+	public int solicitaValidaEscolhaJogador(InteracaoUser csl){
+		int escolha = this.player.solicitaEscolhaJogador(csl);
+		while (!this.validaEscolhaJogador(escolha)){
+			csl.imprimir("\n\nOpcao nao eh valida.");
+			escolha = this.player.solicitaEscolhaJogador(csl);
+		}
+		return escolha;
+	};
+	
+	public void infoRodada(InteracaoUser csl ){
+		csl.imprimir("\nRodada " + (countQuestoes+1) + " de 8");
+		csl.imprimir("\nPontuacao atual: " + this.player.getPontos());
+	}
+	public void jogar(InteracaoUser csl) {
+		while (countQuestoes <= 7){
+			int escolha; 
+			this.infoRodada(csl);
+			this.proximaQuestao();
+			csl.imprimir(this.q.retornaOpcoesUser(false, this.player));
+			escolha = this.solicitaValidaEscolhaJogador(csl);
+			if (escolha == REMOVER_OPCAO){
+				this.player.removerOpcao();
+				csl.imprimir(this.q.retornaOpcoesUser(true, this.player));
+				escolha = this.solicitaValidaEscolhaJogador(csl);
+			}
+			if (escolha >= ALTERNATIVA_A && escolha <= ALTERNATIVA_D){
+				if (!q.validaResposta(escolha)){
+					csl.imprimir("\n\nEROOOOU. Jogo finalizado.");
+					return;
+				} else {
+					this.player.somaPontosJogador(countQuestoes);
+					csl.imprimir("\n\nAcertouuu. Proxima questao.");
+					countQuestoes++;
+				}
+			}else{
+				if (escolha == PULAR){
+					this.player.pular(csl);
+				}
+				else { 
+					if (escolha == DESISTIR){
+						this.player.desistir(csl);
+						return;
+					}
+				}	
+			}
+		}	
+
+		csl.imprimir("\n\nVoce ganhou!. Premio: R$  " + this.player.getPontos());
+		
+	}	
+	
+}

@@ -1,0 +1,97 @@
+import java.util.*;
+
+public class Questao {
+	private String enunciado;
+	private String r1;
+	private String r2;
+	private String r3;
+	private String r4;
+	private int respostaCorreta;
+	
+	public Questao(String enunciado, String r1,String r2, String r3,String r4,	int respostaCorreta){
+		this.enunciado = enunciado;
+		this.r1 = r1;
+		this.r2 = r2;
+		this.r3 = r3;
+		this.r4 = r4;
+		this.respostaCorreta = respostaCorreta;
+	}
+	
+	public Questao() {}
+
+	public String retornaOpcoesUser(boolean pulo, Jogador player) {
+		if (!pulo){
+			return this.retornaQuestaoImprimir(player);
+		} else 
+		{
+			return this.retornaRemoveUmaOpcao(player);
+		}
+	}
+
+	public String retornaQuestaoImprimir(Jogador player) {
+		String retorno= "";
+		retorno += "------------------------------";
+		retorno += "\nPergunta: " + this.enunciado;
+		retorno += "\nAlternativas: ";
+		retorno += "\nA-" + this.r1 ;
+		retorno += "\nB-" + this.r2 ;
+		retorno += "\nC-" + this.r3 ;
+		retorno += "\nD-" + this.r4 ;
+		retorno += "\n------------------------------";
+		retorno += "\nDigite a opçao para escolher:";
+		retorno += "\n0-Desistir ";
+		retorno += "\n1-Alternativa A ";
+		retorno += "\n2-Alternativa B ";
+		retorno += "\n3-Alternativa C ";
+		retorno += "\n4-Alternativa D ";
+		if (player.podePular())
+			retorno += "\n5-Pular QuestÃ£o ";
+		if (player.podeRemoverOpcao())
+			retorno += "\n6-Remover uma opcao ";
+		retorno +="\n-------------------------------" ;
+		
+		return retorno;
+	}
+	
+	public String retornaRemoveUmaOpcao(Jogador player) {
+		Random rand = new Random();
+		int removida = rand.nextInt(4)+1;
+		while (removida == this.respostaCorreta) {
+			removida = rand.nextInt(4)+1;
+		}
+		String retorno= "";
+		retorno += "------------------------------";
+		retorno += "\nPergunta: " + this.enunciado;
+		retorno += "\nAlternativas: ";
+		if (removida != 1)
+			retorno += "\nA-" + this.r1 ;
+		if (removida != 2)
+			retorno += "\nB-" + this.r2 ;
+		if (removida != 3)
+			retorno += "\nC-" + this.r3 ;
+		if (removida != 4)
+			retorno += "\nD-" + this.r4 ;
+		retorno += "\n------------------------------";
+		retorno += "\nDigite a opçao para escolher:";
+		retorno += "\n0-Desistir ";
+		if (removida != 1)
+			retorno += "\n1-Alternativa A ";
+		if (removida != 2)
+			retorno += "\n2-Alternativa B ";
+		if (removida != 3)
+			retorno += "\n3-Alternativa C ";
+		if (removida != 4)
+			retorno += "\n4-Alternativa D ";
+		if (player.podePular())
+			retorno += "\n5-Pular Questão ";
+		if (player.podeRemoverOpcao())
+			retorno += "\n6-Remover uma opcao ";
+		retorno +="\n-------------------------------" ;
+		
+		return retorno;
+	}
+	
+	public boolean validaResposta(int alternativa) {
+		return (alternativa == this.respostaCorreta);
+	}
+}

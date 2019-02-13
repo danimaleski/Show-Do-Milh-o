@@ -1,0 +1,32 @@
+import java.util.Scanner;
+
+
+public class InteracaoUser {
+	Scanner sc = new Scanner(System.in);
+	
+	public int solicitaValor(){
+		return this.sc.nextInt();
+	}
+	
+	public void imprimir (String s){
+		System.out.println(s);
+	}
+
+	public boolean confirmacao (String s){
+		int escolha  = 0;
+		while (escolha == 0){
+			System.out.println("\n\n\nDeseja confirmar a escolha?");
+			System.out.println("\n1-SIM");
+			System.out.println("\n2-Não");
+			escolha =  this.solicitaValor();
+			if (escolha != 1 && escolha !=2){
+				escolha = 0;
+				System.out.println("\nOpcao inválida.");
+			}
+		}
+		return escolha == 1;
+	}	
+}
+
+
+

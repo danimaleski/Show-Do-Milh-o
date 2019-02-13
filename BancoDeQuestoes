@@ -1,0 +1,106 @@
+import java.util.*;
+
+public class BancoDeQuestoes{
+ 
+  private ArrayList<Questao> faceis;
+  private ArrayList<Questao> medias;
+  private ArrayList<Questao> dificeis;
+ 
+  public BancoDeQuestoes(){
+    this.faceis = new ArrayList<Questao>();
+    this.medias = new ArrayList<Questao>();
+    this.dificeis = new ArrayList<Questao>();
+    
+    this.criarQuestoesFaceis();
+    this.criarQuestoesMedias();
+    this.criarQuestoesDificeis();
+  }
+  
+  public Questao sortearQuestaoFacil(){
+     Random random = new Random();
+     Collections.shuffle(this.faceis);
+     int i = random.nextInt(this.faceis.size());
+     Questao sorteada = this.faceis.remove(i);
+     
+     return sorteada;
+  }
+  public Questao sortearQuestaoMedia(){
+    Random random = new Random();
+    Collections.shuffle(this.faceis);
+     int i = random.nextInt(this.medias.size());
+     Questao sorteada = this.medias.remove(i);
+     
+     return sorteada;
+  }
+  public Questao sortearQuestaoDificil(){
+    Random random = new Random();
+    Collections.shuffle(this.faceis);
+     int i = random.nextInt(this.dificeis.size());
+     Questao sorteada = this.dificeis.remove(i);
+     
+     return sorteada;
+  }
+  
+  public void criarQuestoesFaceis(){
+    this.faceis.add(new Questao("Em qual cidade está o Cristo Redentor do Corcovado?", "Rio de Janeiro", "São Paulo", "Curitiba", "Belo Horizonte", 1));
+    this.faceis.add(new Questao("Quantos centímetros equivalem a um metro?", "10", "100", "1000", "10000", 2));	
+    this.faceis.add(new Questao("Onde a mamãe canguru carrega o filhote?", "Na orelha", "Nas costas", "Na boca", "Na bolsa", 4));
+    this.faceis.add(new Questao("Que fruta é ressecada para se tornar uma ameixa seca?", "Ameixa", "Pêssego", "Uva", "Melão", 1));
+    this.faceis.add(new Questao("Qual destes alimentos devemos consumir em menor quantidade?", "Verduras", "Legumes", "Gorduras", "Frutas", 3));
+    this.faceis.add(new Questao("Como é o nome da cabeleira que envolve a cabeça do leão?", "Topete", "Cacho", "Juba", "Peruca", 3));
+    this.faceis.add(new Questao("Qual é a cidade do Batman?", "Gotham City", "Metrópolis", "Pleasantville", "Anytown", 1));
+    this.faceis.add(new Questao("Quantos eram os anões da história “A branca de neve”?", "Seis", "Sete", "Oito", "Nove", 2));
+    this.faceis.add(new Questao("De quantos anos é constituído um século?", "50", "100", "1000", "1500", 2));
+    this.faceis.add(new Questao("Qual casal foi expulso do Paraíso?", "Sansão e Dalila", "José e Maria", "Sara e Abraão", "Adão e Eva", 4));
+    this.faceis.add(new Questao("Quem é o primeiro substituto do Presidente?", "Vereador", "Vice-Presidente", "Senador", "Deputado", 2));
+    this.faceis.add(new Questao("Que animal é o Pateta?", "Cavalo", "Burro", "Cachorro", "Raposa", 3));
+    
+      
+  }
+  public void criarQuestoesMedias(){
+    this.medias.add(new Questao("Segundo o romance, que animal era “Moby Dick”?","Tubarão","Golfinho","Polvo","Baleia", 4));
+    this.medias.add(new Questao("Qual é a orixá conhecida como “A Rainha do mar”?","Iansã","Mamãe Oxum","Axé","Iemanjá", 4));
+    this.medias.add(new Questao("Qual é inseto que transmite doença de Chagas?","Pulga","Babeiro","Barata","Abelha", 2));
+    this.medias.add(new Questao("Como são chamados os pedaços de gelo que caem durante a chuva?","Granito","Granizo","Picolé","Neve", 2));
+    this.medias.add(new Questao("Na literatura, quem foi o criador da boneca Emília?", "Monteiro Lobato","Maurício de Souza","Walt Disney","Jorge Amado", 1));
+    this.medias.add(new Questao("Que nome se dá a cada parte do esqueleto?","Caveira","Osso","Arcada","Bacia", 2));
+    this.medias.add(new Questao("Qual exame é usado para comprovar a paternidade?","De sangue","De DNA","De urina","De consciência", 2));
+    this.medias.add(new Questao("Qual é o livro mais impresso no mundo?","Jubiabá","Gabriela, Cravo e Canela","Bíblia","Terras do sem fim", 3));
+    this.medias.add(new Questao("Como se chama o lugar onde ficam as mulheres do sultão?","Harém","Labirinto","Coliseu","Choupana", 1));  
+    
+    
+  }
+  public void criarQuestoesDificeis(){
+    this.dificeis.add(new Questao("Quem foi o último rei da Macedônia?", "Alexandre", "Felipe", "Perseu", "Adrisco", 3));
+    this.dificeis.add(new Questao("Qual é o nome do osso da coxa do ser humano?", "Fêmur", "Tíbia", "Perônio", "Úmero", 1));
+    this.dificeis.add(new Questao("Qual destes órgãos não faz parte do sistema digestivo?", "Boca", "Brônquios", "Faringe", "Intestino", 2));   
+        
+  }
+ 
+  public boolean aindaTemQuestoesFaceis(){
+	  if(this.faceis.size() == 0){
+	    return false;
+	  } 
+    else{
+      return true;
+    }
+  }
+public boolean aindaTemQuestoesMedias(){
+  if(this.faceis.size() == 0){
+	    return false;
+	  } 
+    else{
+      return true;
+    }
+}
+ 
+public boolean aindaTemQuestoesDificeis(){
+  if(this.faceis.size() == 0){
+	    return false;
+	  } 
+    else{
+      return true;
+    }
+}
+ 
+}

@@ -1,0 +1,56 @@
+public class Jogador {
+	public String nome;
+	private int pontos;
+	private int qtdPulos;
+	private int removerOpcao;
+	
+	public Jogador() {
+		this.nome = "Jogador1";
+		this.pontos = 0;
+		this.qtdPulos = 0;
+		this.removerOpcao = 0;
+	}
+	
+	public boolean podePular(){
+		return this.qtdPulos < 3; 
+	}
+	
+	public void pular(InteracaoUser csl){
+		this.qtdPulos++;
+		csl.imprimir("Jogador pulou a questao");
+	}
+	
+	public boolean podeRemoverOpcao(){
+		return this.removerOpcao < 1; 
+	}
+	
+	public void removerOpcao(){
+		this.removerOpcao++;
+	}
+	
+	public int getPontos(){
+		return this.pontos;
+	}
+
+	public int solicitaEscolhaJogador(InteracaoUser csl){
+		return csl.solicitaValor();
+	}
+
+	public void somaPontosJogador(int nrQuestao){
+		if (nrQuestao<4){
+			this.pontos +=1000;
+		}
+		else{ 
+			if (nrQuestao<7){
+				this.pontos +=3000;
+			}
+			else{
+				this.pontos +=987000;
+			}
+		}
+	}
+
+	public void desistir(InteracaoUser csl){
+		csl.imprimir("Jogador desistiu - Pontuacao Final: " + this.pontos/2);
+	}
+}
